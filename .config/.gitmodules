@@ -1,0 +1,3 @@
+[submodule "lib/esp32-toolkit-lib/"]
+  path = lib/esp32-toolkit-lib/
+  url = git@gitlab.com/etienne1911/esp32-toolkit-lib.git
