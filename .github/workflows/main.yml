@@ -38,7 +38,7 @@ jobs:
     - uses: actions/checkout@v3
       with:
         # fetch-depth: 0
-        path: lib/exp32-toolkit-lib
+        path: lib/${{ env.LIB_NAME }}
     - name: Configure workspace
       env:
         MKLITTLEFS_BIN_URL: "https://github.com/earlephilhower/mklittlefs/releases/download/3.0.0/x86_64-linux-gnu-mklittlefs-295fe9b.tar.gz"
