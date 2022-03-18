@@ -45,7 +45,7 @@ jobs:
           DIGIPOT_LIB_URL: "https://electropeak.com/learn/wp-content/uploads/2021/02/DigiPotX9Cxxx.zip"
         run: |
           rm platformio.ini && ln -s lib/$LIB_NAME/.config/platformio.ini platformio.ini
-          ln -s lib/$LIB_NAME/.config/main.cpp src/main.cpp
+          ln -s ../lib/$LIB_NAME/.config/main.cpp src/main.cpp
           ln -s lib/$LIB_NAME/.config/.gitmodules .gitmodules
           ln -s lib/$LIB_NAME/.config/scripts/replace_fs.py replace_fs.py
           cd lib/$LIB_NAME && git remote set-url origin git@github.com:$GITHUB_REPOSITORY.git
