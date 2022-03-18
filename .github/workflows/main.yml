@@ -57,7 +57,7 @@ jobs:
     - name: Workspace artefact
       uses: actions/upload-artifact@v2
       with:
-        name: pwa-workspace-artifact
+        name: pio-workspace-artifact
         path: |
           .
         
