@@ -85,5 +85,5 @@ jobs:
       with:
         name: pio-workspace-artifact
         path: |
-          '.pio/build/${PIO_ENV_CONF}/firmware.bin'
+          .pio/build/${{ PIO_ENV_CONF }}/firmware.bin
         
