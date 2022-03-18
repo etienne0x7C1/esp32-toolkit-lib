@@ -50,7 +50,14 @@ jobs:
         cp lib/$LIB_NAME/.config/main.cpp ./
         cp lib/$LIB_NAME/.config/.gitmodules ./
         cp lib/$LIB_NAME/.config/scripts/replace_fs.py .
-        wget -O mklittlefs.tar.gz $MKLITTLEFS_BIN_URL && tar -xf mklittlefs.tar.gz && mv mklittlefs/mklittlefs ./ && rmdir mklittlefs/ && rm mklittlefs.tar.gz
-        wget $DIGIPOT_LIB_URL && unzip DigiPotX9Cxxx.zip && mv DigiPotX9Cxxx/ lib/  && rm DigiPotX9Cxxx.zip
-        pwd && ls -laR
+        cd /home/runner/work/ 
+        wget -O mklittlefs.tar.gz $MKLITTLEFS_BIN_URL && tar -xf mklittlefs.tar.gz && mv mklittlefs/mklittlefs $GITHUB_WORKSPACE
+        wget $DIGIPOT_LIB_URL && unzip DigiPotX9Cxxx.zip && mv DigiPotX9Cxxx/ $GITHUB_WORKSPACE/lib/
+        ls -laR $GITHUB_WORKSPACE
+    - name: Workspace artefact
+      uses: actions/upload-artifact@v2
+      with:
+        name: pwa-workspace-artifact
+        path: |
+          .
         
