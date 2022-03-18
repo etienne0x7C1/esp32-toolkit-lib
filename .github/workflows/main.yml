@@ -44,10 +44,10 @@ jobs:
           MKLITTLEFS_BIN_URL: "https://github.com/earlephilhower/mklittlefs/releases/download/3.0.0/x86_64-linux-gnu-mklittlefs-295fe9b.tar.gz"
           DIGIPOT_LIB_URL: "https://electropeak.com/learn/wp-content/uploads/2021/02/DigiPotX9Cxxx.zip"
         run: |
-          cp lib/$LIB_NAME/.config/platformio.ini ./
-          cp lib/$LIB_NAME/.config/main.cpp ./src/
-          cp lib/$LIB_NAME/.config/.gitmodules ./
-          cp lib/$LIB_NAME/.config/scripts/replace_fs.py .
+          ln -s lib/$LIB_NAME/.config/platformio.ini platformio.ini
+          ln -s lib/$LIB_NAME/.config/main.cpp src/main.cpp
+          ln -s lib/$LIB_NAME/.config/.gitmodules .gitmodules
+          ln -s lib/$LIB_NAME/.config/scripts/replace_fs.py replace_fs.py
           cd lib/$LIB_NAME && git remote set-url origin git@github.com:$GITHUB_REPOSITORY.git
           cd /home/runner/work/ 
           wget -O mklittlefs.tar.gz $MKLITTLEFS_BIN_URL && tar -xf mklittlefs.tar.gz && mv mklittlefs/mklittlefs $GITHUB_WORKSPACE
