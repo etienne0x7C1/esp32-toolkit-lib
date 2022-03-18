@@ -83,7 +83,7 @@ jobs:
     - name: Firmware artifact
       uses: actions/upload-artifact@v2
       with:
-        name: pio-workspace-artifact
+        name: firmware-release
         path: |
           .pio/build/${{ env.PIO_ENV_CONF }}/firmware.bin
         
