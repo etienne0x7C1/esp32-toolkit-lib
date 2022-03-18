@@ -37,7 +37,7 @@ jobs:
       # cd lib/ && git clone git@github.com/GITHUB_REPOSITORY
     - uses: actions/checkout@v3
       with:
-        fetch-depth: 0
+        # fetch-depth: 0
         path: lib/exp32-toolkit-lib
     - name: Configure workspace
       env:
@@ -45,7 +45,7 @@ jobs:
         DIGIPOT_LIB_URL: "https://electropeak.com/learn/wp-content/uploads/2021/02/DigiPotX9Cxxx.zip"
       run: |
         cp lib/$LIB_NAME/.config/platformio.ini ./
-        cp lib/$LIB_NAME/.config/main.cpp ./
+        cp lib/$LIB_NAME/.config/main.cpp ./src/
         cp lib/$LIB_NAME/.config/.gitmodules ./
         cp lib/$LIB_NAME/.config/scripts/replace_fs.py .
         cd /home/runner/work/ 
@@ -64,6 +64,8 @@ jobs:
     name: Build firmware
     needs: workspace_setup
     runs-on: ubuntu-latest
+    env:
+      PIO_ENV_CONF: arduino-esp32
     steps:
     - name: Retrieve workspace artifact
       uses: actions/download-artifact@v2
@@ -77,5 +79,11 @@ jobs:
         pip install --upgrade platformio
     - name: Build project
       run: |
-        pio run -e arduino-esp32
+        pio run -e $PIO_ENV_CONF
+    - name: Firmware artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: pio-workspace-artifact
+        path: |
+          .pio/build/$PIO_ENV_CONF/firmware.bin
         
