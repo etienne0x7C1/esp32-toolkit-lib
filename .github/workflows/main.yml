@@ -13,10 +13,6 @@ jobs:
       LIB_NAME: exp32-toolkit-lib
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # - uses: actions/checkout@v2
-    - name: dbg
-      run: |
-        pwd && ls -la
     - name: Cache pip
       uses: actions/cache@v2
       with:
@@ -61,10 +57,11 @@ jobs:
       with:
         name: pio-workspace-artifact
         path: |
+          ./
   
 # This job retrieve workspace artifact from previous job and builds firmware
   build_firmware:
-    name: Firmware build
+    name: Build firmware
     needs: workspace_setup
     runs-on: ubuntu-latest
     
@@ -74,6 +71,10 @@ jobs:
       with:
         name: pio-workspace-artifact 
       
-    - name: Display structure of downloaded files
+    - name: Check workspace structure
       run: ls -R
+
+    - name: Build project
+      run: |
+        pio run -e arduino-esp32
         
