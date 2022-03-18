@@ -2,7 +2,7 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <iostream>
-//#include "../../../Dont-Commit-Me.h"
+// #include "../../../Dont-Commit-Me.h"
 class NetworkModule : public FirmwareModule
 {
     static const char *hotspotSSID;
@@ -12,9 +12,9 @@ class NetworkModule : public FirmwareModule
     static const char *wifiPWD;
 
 public:
-    NetworkModule() : FirmwareModule() // call base class
+    // if redefining constructor, call base class to register
+    NetworkModule() : FirmwareModule("Network") 
     {
-        Serial.println("** Network Module **");
     }
 
     void setup()
@@ -27,7 +27,7 @@ public:
 
     void wifiAP()
     {
-        Serial.print("[Network] [WifiAP] Setting AP (Access Point)...");
+        Serial.print("[Network - WifiAP] Setting AP (Access Point)...");
         WiFi.softAP(NetworkModule::hotspotSSID, NetworkModule::hotspotPWD);
         std::cout << "Setup with IP " << WiFi.softAPIP() << std::endl;
     }
@@ -36,7 +36,7 @@ public:
     {
         WiFi.begin(NetworkModule::wifiSSID, NetworkModule::wifiPWD);
         // std::cout << "Connecting to " << wifiSSID << " network";
-        Serial.print("[Network] [WifiSTA] Connecting to ");
+        Serial.print("[Network - WifiSTA] Connecting to ");
         Serial.print(NetworkModule::wifiSSID);
 
         // Wait for connection

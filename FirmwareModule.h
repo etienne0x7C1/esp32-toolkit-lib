@@ -2,6 +2,8 @@
 
 #include <cmath>
 #include <vector>
+// #include <iostream>
+#include <string>
 
 /**
  * Firmware add-on, plugin, tool to implement feature
@@ -15,10 +17,11 @@ public:
     static std::vector<FirmwareModule *> *instances;
 
     int internalCycleCount = 0;
-    int resetCycleCount = pow(2, 18); // the numbers of cycles after which internal counter is increased and cycleCounter is reset
+    int resetCycleCount = pow(2, 20); // the numbers of cycles after which internal counter is increased and cycleCounter is reset
+    std::string moduleName;
 
 public:
-    FirmwareModule();
+    FirmwareModule(std::string moduleName = "Default");
 
     virtual void onCycle();
 

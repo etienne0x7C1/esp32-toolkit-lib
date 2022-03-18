@@ -13,19 +13,23 @@ class WebModule : public FirmwareModule
     static AsyncWebServer server;
     static AsyncWebSocket ws;
 
+public:
+    WebModule() : FirmwareModule("Web")
+    {
+    }
+
     void setup()
     {
-        Serial.println("** Webservices **");
         // WebSocketServerImpl::ws = &ws;
         // bind websocket event handler
         // ws.onEvent(WebSocketServerImpl::eventHandler);
         // bind websocket to webserver
         server.addHandler(&ws);
         // initServerRoutes(&server);
-        Serial.println("OK");
-        Serial.println("");
+        // Serial.println("OK");
+        // Serial.println("");
 
-        Serial.println("** OTA Updater **");
+        Serial.println("[Web - OTA Updater]");
         AsyncElegantOTA.begin(&server);
         Serial.println("OK");
         Serial.println("");

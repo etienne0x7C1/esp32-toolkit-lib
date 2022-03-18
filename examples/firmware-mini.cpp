@@ -5,6 +5,6 @@
  * required build env: esp32doit-devkit-v1
 **/
 
-#include <test-module.h>
+#include <module-template.h>
 
-TestModule *testModule = new TestModule();
+TemplateModule *testModule = new TemplateModule();

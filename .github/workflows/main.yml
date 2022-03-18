@@ -10,7 +10,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     env:
-      LIB_NAME: exp32-toolkit-lib
+      LIB_NAME: esp32-toolkit-lib
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Cache pip
