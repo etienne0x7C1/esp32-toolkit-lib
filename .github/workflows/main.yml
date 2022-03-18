@@ -44,7 +44,7 @@ jobs:
           MKLITTLEFS_BIN_URL: "https://github.com/earlephilhower/mklittlefs/releases/download/3.0.0/x86_64-linux-gnu-mklittlefs-295fe9b.tar.gz"
           DIGIPOT_LIB_URL: "https://electropeak.com/learn/wp-content/uploads/2021/02/DigiPotX9Cxxx.zip"
         run: |
-          ln -s lib/$LIB_NAME/.config/platformio.ini platformio.ini
+          rm platformio.ini && ln -s lib/$LIB_NAME/.config/platformio.ini platformio.ini
           ln -s lib/$LIB_NAME/.config/main.cpp src/main.cpp
           ln -s lib/$LIB_NAME/.config/.gitmodules .gitmodules
           ln -s lib/$LIB_NAME/.config/scripts/replace_fs.py replace_fs.py
