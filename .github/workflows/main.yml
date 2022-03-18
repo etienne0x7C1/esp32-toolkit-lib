@@ -42,11 +42,15 @@ jobs:
       with:
         path: lib/exp32-toolkit-lib
     - name: Configure workspace
+      env:
+        MKLITTLEFS_BIN_URL: "https://github.com/earlephilhower/mklittlefs/releases/download/3.0.0/x86_64-linux-gnu-mklittlefs-295fe9b.tar.gz"
+        DIGIPOT_LIB_URL: "https://electropeak.com/learn/wp-content/uploads/2021/02/DigiPotX9Cxxx.zip"
       run: |
         cp lib/$LIB_NAME/.config/platformio.ini ./
         cp lib/$LIB_NAME/.config/main.cpp ./
         cp lib/$LIB_NAME/.config/.gitmodules ./
         cp lib/$LIB_NAME/.config/scripts/replace_fs.py .
-        wget -O mklittlefs.tar.gz $MKLITTLEFS_BIN_URL && tar -xf mklittlefs.tar.gz && mv mklittlefs/mklittlefs ./
-        wget $DIGIPOT_LIB_URL && unzip DigiPotX9Cxxx.zip && mv DigiPotX9Cxxx/ lib/
+        wget -O mklittlefs.tar.gz $MKLITTLEFS_BIN_URL && tar -xf mklittlefs.tar.gz && mv mklittlefs/mklittlefs ./ && rmdir mklittlefs/ && rm mklittlefs.tar.gz
+        wget $DIGIPOT_LIB_URL && unzip DigiPotX9Cxxx.zip && mv DigiPotX9Cxxx/ lib/  && rm DigiPotX9Cxxx.zip
         pwd && ls -laR
+        
