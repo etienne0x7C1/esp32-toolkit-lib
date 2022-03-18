@@ -65,7 +65,7 @@ jobs:
     needs: workspace_setup
     runs-on: ubuntu-latest
     env:
-      PIO_ENV_CONF: arduino-esp32
+      PIO_ENV_CONF: esp32
     steps:
     - name: Retrieve workspace artifact
       uses: actions/download-artifact@v2
