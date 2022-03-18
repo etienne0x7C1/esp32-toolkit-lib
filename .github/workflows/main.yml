@@ -3,8 +3,9 @@ name: PlatformIO CI
 on: [push]
 
 jobs:
-  build:
-
+  # generate workspace artifact that will be used by next job to build firmware
+  workspace_setup:
+    name: Generate workspace
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
@@ -37,9 +38,10 @@ jobs:
     - name: Setup PlatformIO project
       run: |
         pio init --board esp32doit-devkit-v1
-        ls -la 
-    - uses: actions/checkout@v2
+      # cd lib/ && git clone git@github.com/GITHUB_REPOSITORY
+    - uses: actions/checkout@v3
       with:
+        fetch-depth: 0
         path: lib/exp32-toolkit-lib
     - name: Configure workspace
       env:
@@ -54,10 +56,24 @@ jobs:
         wget -O mklittlefs.tar.gz $MKLITTLEFS_BIN_URL && tar -xf mklittlefs.tar.gz && mv mklittlefs/mklittlefs $GITHUB_WORKSPACE
         wget $DIGIPOT_LIB_URL && unzip DigiPotX9Cxxx.zip && mv DigiPotX9Cxxx/ $GITHUB_WORKSPACE/lib/
         ls -laR $GITHUB_WORKSPACE
-    - name: Workspace artefact
+    - name: Workspace artifact
       uses: actions/upload-artifact@v2
       with:
         name: pio-workspace-artifact
         path: |
-          .
+  
+# This job retrieve workspace artifact from previous job and builds firmware
+  build_firmware:
+    name: Firmware build
+    needs: workspace_setup
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Retrieve workspace artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: pio-workspace-artifact 
+      
+    - name: Display structure of downloaded files
+      run: ls -R
         
