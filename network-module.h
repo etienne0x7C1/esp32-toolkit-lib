@@ -15,14 +15,15 @@ public:
     // if redefining constructor, call base class to register
     NetworkModule() : FirmwareModule("Network") 
     {
+        FirmwareModule::setup();
     }
 
     void setup()
     {
-        Serial.println("[Network] Setup => Begin");
+        Serial.println("[Network - Setup] Begin");
         // wifiAP();
         wifiSTA();
-        Serial.println("[Network] Setup => Done");
+        Serial.println("[Network - Setup] Done");
     }
 
     void wifiAP()

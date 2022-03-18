@@ -12,8 +12,10 @@
  * use appropriate build environment in platformio (specified in chosen source file)
  */
 
-// #include "examples/firmware-minimal.cpp"
+// #include "examples/firmware-mini.cpp"
 #include "examples/firmware-base.cpp"
+// #include "examples/firmware-full.cpp"
+// #include "examples/firmware-cust.cpp"
 
 /**
  * setup
@@ -21,7 +23,7 @@
 void setup()
 {
   Serial.begin(115200);
-  Serial.println("First log!");
+  Serial.println("[ESP32] First log!");
 
   // Init all modules
   FirmwareModule::setupAll();

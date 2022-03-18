@@ -8,7 +8,7 @@
 **/
 
 #include <network-module.h>
-// #include <filesys-module.h>
+#include <filesys-module.h>
 #include <web-module.h>
 #include <module-template.h>
 
@@ -18,6 +18,6 @@
 // TestModule testModule();
 
 NetworkModule *networkModule = new NetworkModule();
-// FilesysModule *filesysModule = new FilesysModule();
+FilesysModule *filesysModule = new FilesysModule();
 WebModule *webModule = new WebModule();
 TemplateModule *testModule = new TemplateModule();

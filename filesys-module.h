@@ -4,24 +4,29 @@
 
 class FilesysModule : public FirmwareModule
 {
+public:
+    FilesysModule() : FirmwareModule("Filesystem")
+    {
+    }
+
     void setup()
     {
-        Serial.println("** Filesystem **");
+        FirmwareModule::setup();
 
         if (!LittleFS.begin(true))
         {
-            Serial.println("error while mounting filesystem");
+            Serial.println("[LittleFS] error while mounting filesystem");
         }
-        Serial.println("mounted successfully!");
+        Serial.println("[LittleFS] mounted successfully!");
 
         File file = LittleFS.open("/test.txt", "r");
         if (!file)
         {
-            Serial.println("Failed to open file for reading");
+            Serial.println("[LittleFS] Failed to open file for reading");
             return;
         }
 
-        Serial.println("File Content:");
+        Serial.println("[LittleFS] File Content:");
         while (file.available())
         {
             Serial.write(file.read());
@@ -30,7 +35,6 @@ class FilesysModule : public FirmwareModule
 
         listDir(LittleFS, "/", 0);
 
-        Serial.println("OK");
-        Serial.println("");
+        Serial.println("[LittleFS] Done");
     }
 };
