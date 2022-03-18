@@ -3,10 +3,9 @@
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include <AsyncElegantOTA.h>
+#include <server-routes.h>
 // #include <WebSocket.h>
-// #include <server-routes.h>
 // #include <web-controls.h>
-#include <iostream>
 
 class WebModule : public FirmwareModule
 {
@@ -25,15 +24,14 @@ public:
         // ws.onEvent(WebSocketServerImpl::eventHandler);
         // bind websocket to webserver
         server.addHandler(&ws);
-        // initServerRoutes(&server);
-        // Serial.println("OK");
+        Serial.println("[Web - Server] loading server routes");
+        initServerRoutes(&server);
+        Serial.println("[Web - Server] Done");
         // Serial.println("");
 
-        Serial.println("[Web - OTA Updater]");
+        Serial.println("[Web - OTA] Begin serving");
         AsyncElegantOTA.begin(&server);
-        Serial.println("OK");
-        Serial.println("");
-
+        Serial.println("[Web - OTA] Ok");
         // Start server
         server.begin();
     }
