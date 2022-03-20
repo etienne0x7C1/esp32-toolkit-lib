@@ -66,6 +66,7 @@ jobs:
     needs: workspace_setup
     runs-on: ubuntu-latest
     env:
+      LIB_NAME: esp32-toolkit-lib
       PIO_ENV_CONF: esp32-latest
       FIRMWARE_SRC: firmware-main.cpp # firmware source file to build
     steps:
@@ -81,7 +82,7 @@ jobs:
           pip install --upgrade platformio
       - name: Build project
         run: |
-          # link to correct source file
+          # link to selected firmware source file
           rm src/main.cpp && ln -s ../lib/$LIB_NAME/examples/$FIRMWARE_SRC src/main.cpp
           pio run -e $PIO_ENV_CONF
       - name: Firmware artifact
