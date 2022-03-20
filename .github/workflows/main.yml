@@ -67,6 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PIO_ENV_CONF: esp32-latest
+      FIRMWARE_SRC: firmware-main.cpp # firmware source file to build
     steps:
       - name: Retrieve workspace artifact
         uses: actions/download-artifact@v2
@@ -80,6 +81,8 @@ jobs:
           pip install --upgrade platformio
       - name: Build project
         run: |
+          # link to correct source file
+          rm src/main.cpp && ln -s ../lib/$LIB_NAME/examples/$FIRMWARE_SRC src/main.cpp
           pio run -e $PIO_ENV_CONF
       - name: Firmware artifact
         uses: actions/upload-artifact@v2

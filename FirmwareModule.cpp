@@ -47,7 +47,7 @@ void FirmwareModule::setupAll()
     int i = 0;
     for (auto module : *FirmwareModule::instances)
     {
-        logStr = "[Firmware] module " + std::to_string(i + 1) + " of " + std::to_string(total) + ": ";
+        logStr = "[Module " + std::to_string(i + 1) + "/" + std::to_string(total) + "] ";
         logStr += "*** " + module->moduleName + " ***";
         Serial.println(logStr.c_str());
         module->setup();
