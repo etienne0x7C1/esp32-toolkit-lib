@@ -4,12 +4,17 @@
 #include <network-module.h>
 #include <filesys-module.h>
 #include <web-module.h>
-#include <websocket-example.h>
+#include <WebSocketService.h>
 #include <module-template.h>
+#include <CamControls.h>
+#include <RovControl.h>
+
 
 NetworkModule networkModule;
 FilesysModule filesysModule;
 WebModule webModule;
+RovControl rovcontrol;
+CamControls camcontrols;
 TemplateModule testModule;
 
 /**
@@ -25,8 +30,8 @@ void setup()
     // ws.onEvent(wsh.eventHandler);
     // webModule.addWebSocket(&ws);
     //  bind websocket event handler
-    WebSocketTemplate::aws.onEvent(WebSocketTemplate::eventHandler);
-    webModule.addWebSocket(&WebSocketTemplate::aws);
+    WebSocketService::aws.onEvent(WebSocketService::eventHandler);
+    webModule.addWebSocket(&WebSocketService::aws);
     // Init all modules
     FirmwareModule::setupAll();
 }
@@ -36,7 +41,7 @@ void setup()
  */
 void loop()
 {
-    WebSocketTemplate::aws.cleanupClients();
+    WebSocketService::aws.cleanupClients();
     // Refresh all modules
     FirmwareModule::loopAll();
 }
