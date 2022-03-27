@@ -4,7 +4,7 @@ tasks:
   - name: Workspace Setup
     env:  
       PROJECT_ARTIFACT_URL: 'https://github.com/etienne1911/esp32-toolkit-lib/releases/download'
-      PROJECT_ARTIFACT_REL: 'r1'
+      PROJECT_ARTIFACT_REL: 'r2'
       PROJECT_ARTIFACT_NAME: 'pio-workspace-artifact' #esp32-pio-workspace
       SCRIPTS_DIR: src/modules/pwa-tools/scripts/
     init: |
