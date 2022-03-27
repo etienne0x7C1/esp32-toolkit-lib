@@ -21,7 +21,7 @@ public:
     std::string moduleName;
 
 public:
-    FirmwareModule(std::string moduleName = "Default");
+    FirmwareModule(std::string moduleName = "defaultmodule");
 
     virtual void onCycle();
 
