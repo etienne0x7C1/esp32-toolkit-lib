@@ -17,9 +17,9 @@ tasks:
       rm ${PROJECT_ARTIFACT_NAME}.zip
       # substitute lib in workspace artifact to use current repo
       rm -rf lib/esp32-toolkit-lib/ && mv esp32-toolkit-lib/ lib/
-      ln -s lib/esp32-toolkit-lib/examples/firmware-base.cpp src/main.cpp
+      ln -s ../lib/esp32-toolkit-lib/examples/firmware-base.cpp src/main.cpp
+    command: |
       python -m pip install --upgrade pip
       pip install --upgrade platformio
-    command: |
       cd /workspace
       # rm src/main.cpp && ln -s lib/esp32-toolkit-lib/examples/firmware-base.cpp src/main.cpp && pio run 
