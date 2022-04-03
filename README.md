@@ -3,19 +3,60 @@ ESP32 firmware build lib
 
 Aim is to provide core features to quickly develop ESP32 firmware for various diy projects, as well as a modular architecture to extend firmware's features . 
 
-# Quick start
+# Worspace dev environment setup
+
+## Remote development
+
+Projects configuration is included to work with Gitpod environment out of the box.
+
+Prefix repo url with `gitpod.io/#` to launch fully setup remote workspace
+
+## Local development
 
 - Grab a workspace artifact which includes source and project configuration
-- Customize wifi settings in `network-module.h`.
-- Build one of the default firmware available in exemples by linking main.cpp to the chosen firmware source file.
-- Upload to the board using serial interface.
+- Extract workspace
+- Inside workspace root dir, create following symlinks
+```
+    ln -s lib/esp32-toolkit-lib/.config/platformio.ini platformio.ini
+    ln -s lib/esp32-toolkit-lib/.config/.gitmodules .gitmodules
+    ln -s lib/esp32-toolkit-lib/.config/scripts/replace_fs.py replace_fs.py
+    mkdir src && ln -s ../lib/esp32-toolkit-lib/examples/firmware-main.cpp src/main.cpp
+```
 
+Note: A custom firmware available in examples, can be built by linking main.cpp to the chosen firmware source file.
 
-## Included frameworks, librairies
+# Usage
+## First time
+
+- If running local you'll need an installation of platformIO available on the machine.
+
+- Once workspace setup done with one of the previous method, customize wifi settings:
+
+- Project is built with:
+
+```pio run -e esp32-latest```
+
+`esp32-latest` being one of the build environment specified in `platformio.ini` file.
+
+This will create firmware file in folder: `.pio/build/esp32-latest/firmware.bin`, 
+
+- Upload firmware to the board using serial.
+
+## Next steps
+- if wifi settings were correctly setup at previous step, the board should be available on local network.
+
+Access it in browser with the url: `http://<board IP>` which will show the dashboard interface with several menus.
+
+To find the board IP it is automatically displayed over serial interface on each boot.
+
+- from now on, it won't be necessary to use serial to update firmware, which can be uploaded directly to the board
+using OTA updater available at: `http://<board IP>/update`
+
+## Key features and embedded libraries
 The lib makes use of the following libs:
 - latest [arduino-esp32](https://github.com/espressif/arduino-esp32) framework ([docs](https://docs.espressif.com/projects/arduino-esp32/en/latest/)): mandatory to use littleFS (not available to date in PIO)
 - `littleFS` filesystem with strong advantage (over SPIFFS) to support directories. 
-- `ArduinoJson`: provide support for JSON
+- `ArduinoJson`: support for JSON
 
 # Architecture
 

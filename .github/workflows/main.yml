@@ -44,6 +44,7 @@ jobs:
           MKLITTLEFS_BIN_URL: "https://github.com/earlephilhower/mklittlefs/releases/download/3.0.0/x86_64-linux-gnu-mklittlefs-295fe9b.tar.gz"
           DIGIPOT_LIB_URL: "https://electropeak.com/learn/wp-content/uploads/2021/02/DigiPotX9Cxxx.zip"
         run: |
+          rm platformio.ini # remove default pio config to allow symlink to custom config later 
           # @todo check if sym link can be included in workspace artifact
           # rm platformio.ini && ln -s lib/$LIB_NAME/.config/platformio.ini platformio.ini
           # ln -s lib/$LIB_NAME/.config/.gitmodules .gitmodules
@@ -53,7 +54,6 @@ jobs:
           cd /home/runner/work/ 
           wget -O mklittlefs.tar.gz $MKLITTLEFS_BIN_URL && tar -xf mklittlefs.tar.gz && mv mklittlefs/mklittlefs $GITHUB_WORKSPACE
           wget $DIGIPOT_LIB_URL && unzip DigiPotX9Cxxx.zip && mv DigiPotX9Cxxx/ $GITHUB_WORKSPACE/lib/
-          rm platformio.ini # remove default pio config to allow symlink to custom config later 
           ls -laR $GITHUB_WORKSPACE
       - name: Workspace artifact
         uses: actions/upload-artifact@v2
