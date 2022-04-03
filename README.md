@@ -7,14 +7,14 @@ Aim is to provide core features to quickly develop ESP32 firmware for various di
 
 ## Remote development
 
-Projects configuration is included to work with Gitpod environment out of the box.
+Projects configuration is included to work with Gitpod out of the box.
 
-Prefix repo url with `gitpod.io/#` to launch fully setup remote workspace
+Prefix repo url with `gitpod.io/#` to launch full remote workspace already preconfigured
 
 ## Local development
 
-- Grab a workspace artifact which includes source and project configuration
-- Extract workspace
+- Grab a workspace artifact 
+- Extract workspace which includes source and project configuration
 - Inside workspace root dir, create following symlinks
 ```
     ln -s lib/esp32-toolkit-lib/.config/platformio.ini platformio.ini
@@ -26,11 +26,11 @@ Prefix repo url with `gitpod.io/#` to launch fully setup remote workspace
 # Usage
 ## First time
 
-- If using local dev env, you'll need an installation of platformIO available on the machine.
+- If using local dev environment, you'll need an installation of platformIO available on the machine.
 
 - Once workspace setup done with one of the previous method, customize wifi settings:
 
-- Project is built with:
+- Project is then built with:
 
 ```pio run -e esp32-latest```
 
