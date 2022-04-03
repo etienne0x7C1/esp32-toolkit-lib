@@ -75,14 +75,14 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: pio-workspace-artifact
+      - name: Check workspace structure
+        run: ls -laR
       - name: Create symlinks
         run: |
           ln -s lib/esp32-toolkit-lib/.config/platformio.ini platform.ini
           ln -s lib/esp32-toolkit-lib/.config/.gitmodules .gitmodules
           ln -s lib/esp32-toolkit-lib/.config/scripts/replace_fs.py replace_fs.py
           ln -s ../lib/esp32-toolkit-lib/examples/firmware-main.cpp src/main.cpp
-      - name: Check workspace structure
-        run: ls -laR
       - name: Install PlatformIO
         run: |
           python -m pip install --upgrade pip
