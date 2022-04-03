@@ -8,17 +8,17 @@ tasks:
       PROJECT_ARTIFACT_NAME: 'pio-workspace-artifact' #esp32-pio-workspace
       SCRIPTS_DIR: src/modules/pwa-tools/scripts/
     init: |
+      echo 'retrieve and extract artifact'
       wget $PROJECT_ARTIFACT_URL/$PROJECT_ARTIFACT_REL/$PROJECT_ARTIFACT_NAME.zip
-      echo 'workspace artifact retrieved'
+      echo 'done retrieving'
       unzip ${PROJECT_ARTIFACT_NAME}.zip
-      echo 'done extracting workspace artifact'
+      echo 'done extracting'
       pwd && ls -la
-      # remove artifact
-      rm ${PROJECT_ARTIFACT_NAME}.zip
-      # substitute lib in workspace artifact to use current repo
+      rm ${PROJECT_ARTIFACT_NAME}.zip # remove artifact file
+      # substitute artifact lib to use current repo instead
       rm -rf lib/esp32-toolkit-lib/ && mv esp32-toolkit-lib/ lib/
-      # make symlinks
-      ln -s lib/esp32-toolkit-lib/.config/platformio.ini platform.ini
+      # symlinks conf
+      ln -s lib/esp32-toolkit-lib/.config/platformio.ini platformio.ini
       ln -s lib/esp32-toolkit-lib/.config/.gitmodules .gitmodules
       ln -s lib/esp32-toolkit-lib/.config/scripts/replace_fs.py replace_fs.py
       ln -s ../lib/esp32-toolkit-lib/examples/firmware-main.cpp src/main.cpp
