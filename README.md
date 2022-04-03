@@ -41,11 +41,11 @@ This will create firmware file in folder: `.pio/build/esp32-latest/firmware.bin`
 - Upload firmware to the board using serial.
 
 ### Next steps
-- if wifi settings were correctly setup at previous step, the board should be available on local network.
+- if wifi settings were correctly setup at previous step, the board should be available on local network at url: `http://<deviceIP>` 
 
-Access it in browser with the url: `http://<board IP>` which will show the dashboard interface with several menus.
+Tip: device ip address is automatically displayed over serial interface on each boot.
 
-To find the board IP it is automatically displayed over serial interface on each boot.
+This should show the dashboard interface with several menus.
 
 - from now on, it won't be necessary to use serial to update firmware, which can be uploaded directly to the board
 using OTA updater available at: `http://<board IP>/update`
