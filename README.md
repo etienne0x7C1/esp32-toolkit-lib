@@ -3,7 +3,7 @@ ESP32 firmware build lib
 
 Aim is to provide core features to quickly develop ESP32 firmware for various diy projects, as well as a modular architecture to extend firmware's features . 
 
-# Worspace dev environment setup
+# Worspace setup
 
 ## Remote development
 
@@ -23,12 +23,10 @@ Prefix repo url with `gitpod.io/#` to launch fully setup remote workspace
     mkdir src && ln -s ../lib/esp32-toolkit-lib/examples/firmware-main.cpp src/main.cpp
 ```
 
-Note: A custom firmware available in examples, can be built by linking main.cpp to the chosen firmware source file.
-
 # Usage
 ## First time
 
-- If running local you'll need an installation of platformIO available on the machine.
+- If using local dev env, you'll need an installation of platformIO available on the machine.
 
 - Once workspace setup done with one of the previous method, customize wifi settings:
 
@@ -51,6 +49,8 @@ To find the board IP it is automatically displayed over serial interface on each
 
 - from now on, it won't be necessary to use serial to update firmware, which can be uploaded directly to the board
 using OTA updater available at: `http://<board IP>/update`
+
+- A custom firmware available in examples, can be built by linking main.cpp to the chosen firmware source file.
 
 ## Key features and embedded libraries
 The lib makes use of the following libs:
