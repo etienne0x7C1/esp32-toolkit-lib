@@ -53,6 +53,7 @@ jobs:
           cd /home/runner/work/ 
           wget -O mklittlefs.tar.gz $MKLITTLEFS_BIN_URL && tar -xf mklittlefs.tar.gz && mv mklittlefs/mklittlefs $GITHUB_WORKSPACE
           wget $DIGIPOT_LIB_URL && unzip DigiPotX9Cxxx.zip && mv DigiPotX9Cxxx/ $GITHUB_WORKSPACE/lib/
+          rm platformio.ini # remove default pio config to allow symlink to custom config later 
           ls -laR $GITHUB_WORKSPACE
       - name: Workspace artifact
         uses: actions/upload-artifact@v2
