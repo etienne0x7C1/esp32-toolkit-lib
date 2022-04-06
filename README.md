@@ -3,17 +3,17 @@ ESP32 firmware build lib
 
 Aim is to provide core features to quickly develop ESP32 firmware for various diy projects, as well as a modular architecture to extend firmware's features . 
 
-## Worspace setup
+## Workspace setup
 
 ### Remote development
 
-Projects configuration is included to work with Gitpod out of the box.
+Gitpod workspace is meant to work out of the box pre-configuration and tools already installed.
 
-Prefix repo url with `gitpod.io/#` to launch full remote workspace already preconfigured
+Just prefix this repository url with `gitpod.io/#` to launch a fully configured remote workspace.
 
 ### Local development
 
-- Grab a workspace artifact 
+- Download workspace artifact 
 - Extract workspace which includes source and project configuration
 - Inside workspace root dir, create following symlinks
 ```
@@ -23,34 +23,63 @@ Prefix repo url with `gitpod.io/#` to launch full remote workspace already preco
     mkdir src && ln -s ../lib/esp32-toolkit-lib/examples/firmware-main.cpp src/main.cpp
 ```
 
-## Usage
-### First time usage
+An installation of platformIO is required.
 
-- If using local dev environment, you'll need an installation of platformIO available on the machine.
+Using python package installer `pip` :
 
-- Once workspace setup done with one of the previous method, customize wifi settings:
+```
+    python -m pip install --upgrade pip
+    pip install --upgrade platformio
+```
 
-- Project is then built with:
+### Wifi configuration
 
-```pio run -e esp32-latest```
+before uploading firmware and filesystem images, wifi settings must be customized in `data/config.json` file
 
-`esp32-latest` being one of the build environment specified in `platformio.ini` file.
+```
+{
+    wifiSSID: "changeme",
+    wifiPWD: "changeme"
+}
+```
 
-This will create firmware file in folder: `.pio/build/esp32-latest/firmware.bin`, 
+## Build
 
-- Upload firmware to the board using serial.
+### firmware
 
-### Next steps
-- if wifi settings were correctly setup at previous step, the board should be available on local network at url: `http://<deviceIP>` 
+``` pio run -e esp32-latest ```
 
-Tip: device ip address is automatically displayed over serial interface on each boot.
+resulting build file located at `.pio/build/esp32-latest/firmware.bin`
 
-This should show the dashboard interface with several menus.
+### filesystem image
 
-- from now on, it won't be necessary to use serial to update firmware, which can be uploaded directly to the board
-using OTA updater available at: `http://<board IP>/update`
+``` pio run -t buildfs -e esp32-latest ```
 
-- A custom firmware available in examples, can be built by linking main.cpp to the chosen firmware source file.
+resulting image file located at `.pio/build/esp32-latest/spiffs.bin`
+
+## Upload
+First time, device must be updated manually using serial upload, then it can be updated directly using OTA method.
+### Serial
+Upload 2 previous image files (`firmware.bin` and `spiffs.bin`) to the board.
+
+- firmware:
+``` pio run -e esp32-latest -t upload ```
+- filesystem image:
+```pio run -e esp32-latest -t uploadfs ```
+### OTA
+If wifi settings were correctly set in `config.json` file, device can be updated directly using Web updater available at: `http://<board IP>/update`
+
+(device ip address is automatically displayed over serial interface on each boot).
+
+In web interface, select either `firmware` and `firmware.bin` file to update firmware, or `filesystem` and `spiffs.bin` image file to update filesystem,
+
+## Device Monitoring
+
+Serial monitoring can be done from console:
+
+`cat /dev/ttyUSB0`
+
+make sure your user has access to serial interface by adding him to the correct group.
 
 ## Key features and embedded libraries
 The lib makes use of the following libs:
@@ -84,7 +113,7 @@ received message to process them.
 
 ## Purpose of this project
 
+- ready to code workspace (available as build artifacts)
 - as less as boilerplate code possible
 - fully automated build process
-- ready to code workspace (available as build artifacts)
 - easy to maintain and customize 
