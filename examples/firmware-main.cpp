@@ -1,8 +1,9 @@
 #include <iostream>
 #include <Arduino.h>
 #include <FirmwareModule.h>
-#include <network-module.h>
 #include <filesys-module.h>
+#include <ConfigLoader.h>
+#include <network-module.h>
 #include <web-module.h>
 #include <WebSocketService.h>
 #include <module-template.h>
@@ -10,8 +11,9 @@
 #include <RovControl.h>
 
 
-NetworkModule networkModule;
 FilesysModule filesysModule;
+ConfigLoader confLoader;
+NetworkModule networkModule;
 WebModule webModule;
 RovControl rovcontrol;
 CamControls camcontrols;

@@ -19,20 +19,6 @@ public:
         }
         Serial.println("[LittleFS] mounted successfully!");
 
-        File file = LittleFS.open("/test.txt", "r");
-        if (!file)
-        {
-            Serial.println("[LittleFS] Failed to open file for reading");
-            return;
-        }
-
-        Serial.println("[LittleFS] File Content:");
-        while (file.available())
-        {
-            Serial.write(file.read());
-        }
-        file.close();
-
         listDir(LittleFS, "/", 0);
 
         Serial.println("[LittleFS] Done");
