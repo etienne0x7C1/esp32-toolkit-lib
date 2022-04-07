@@ -15,12 +15,13 @@ Just prefix this repository url with `gitpod.io/#` to launch a fully configured 
 
 - Download workspace artifact 
 - Extract workspace which includes source and project configuration
-- Inside workspace root dir, create following symlinks
-```
-    ln -s lib/esp32-toolkit-lib/.config/platformio.ini platformio.ini
-    ln -s lib/esp32-toolkit-lib/.config/.gitmodules .gitmodules
-    ln -s lib/esp32-toolkit-lib/.config/scripts/replace_fs.py replace_fs.py
-    mkdir src && ln -s ../lib/esp32-toolkit-lib/examples/firmware-main.cpp src/main.cpp
+- Inside workspace root dir, create following symlinks. 
+one liner: 
+``` 
+ln -s lib/esp32-toolkit-lib/.config/platformio.ini platformio.ini && \
+ln -s lib/esp32-toolkit-lib/.config/scripts/replace_fs.py replace_fs.py && \
+ln -s lib/esp32-toolkit-lib/.config/.gitmodules .gitmodules && \
+mkdir src/ && ln -s ../lib/esp32-toolkit-lib/examples/firmware-main.cpp src/main.cpp 
 ```
 
 An installation of platformIO is required.
@@ -38,8 +39,8 @@ before uploading firmware and filesystem images, wifi settings must be customize
 
 ```
 {
-    wifiSSID: "changeme",
-    wifiPWD: "changeme"
+    "wifiSSID": "changeme",
+    "wifiPWD": "changeme"
 }
 ```
 

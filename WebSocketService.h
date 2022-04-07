@@ -10,6 +10,7 @@ public:
     static AsyncWebSocket aws;
     static std::vector<WebSocketService *> *instances;  // the components that will process json message
     static StaticJsonDocument<200> jsonMsg;
+    static StaticJsonDocument<200> jsonReply;
     std::string name = "";
 
     // WebSocketImpl(string awsUrl) : FirmwareModule("WebSocket")
@@ -22,9 +23,12 @@ public:
     static void eventHandler(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type,
                              void *arg, uint8_t *data, size_t len);
 
-    static void dispatch(void *arg, uint8_t *data, size_t len);
+    static void routeMessages(void *arg, uint8_t *data, size_t len);
+
+    static void dispatchService(std::string service);
+
 
     static void parseJson(std::string jsonStr);
 
-    virtual void process();
+    virtual void processMsg() = 0;
 };
