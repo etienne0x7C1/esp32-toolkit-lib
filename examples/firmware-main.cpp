@@ -7,16 +7,16 @@
 #include <web-module.h>
 #include <WebSocketService.h>
 #include <module-template.h>
-#include <CamControls.h>
-#include <RovControl.h>
+// #include <CamControls.h>
+// #include <RovControl.h>
 
 
 FilesysModule filesysModule;
 ConfigLoader confLoader;
 NetworkModule networkModule;
 WebModule webModule;
-RovControl rovcontrol;
-CamControls camcontrols;
+// RovControl rovcontrol;
+// CamControls camcontrols;
 TemplateModule testModule;
 
 /**

@@ -21,7 +21,7 @@ tasks:
       ln -s lib/esp32-toolkit-lib/.config/platformio.ini platformio.ini
       ln -s lib/esp32-toolkit-lib/.config/.gitmodules .gitmodules
       ln -s lib/esp32-toolkit-lib/.config/scripts/replace_fs.py replace_fs.py
-      ln -s ../lib/esp32-toolkit-lib/examples/firmware-main.cpp src/main.cpp
+      mkdir src/ && ln -s ../lib/esp32-toolkit-lib/examples/firmware-main.cpp src/main.cpp
     command: |
       python -m pip install --upgrade pip
       pip install --upgrade platformio

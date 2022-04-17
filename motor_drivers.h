@@ -5,9 +5,7 @@
 /**
  *  BTS7960 model
  */
-class MotorDriver_BTS7960 : public MotorDriver, GpioService {
-
-    pin
+class MotorDriver_BTS7960 : public MotorDriver {
 
   // PWM properties
   const int pwmFreq = 10000;
