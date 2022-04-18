@@ -9,8 +9,7 @@ class WebSocketService
 public:
     static AsyncWebSocket aws;
     static std::vector<WebSocketService *> *instances;  // the components that will process json message
-    static StaticJsonDocument<200> jsonMsg;
-    static StaticJsonDocument<200> jsonReply;
+    static StaticJsonDocument<800> jsonMsg;
     std::string name = "";
 
     // WebSocketImpl(string awsUrl) : FirmwareModule("WebSocket")

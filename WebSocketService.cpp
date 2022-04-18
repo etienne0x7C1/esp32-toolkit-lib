@@ -15,8 +15,7 @@ std::vector<WebSocketService *> *WebSocketService::instances =
 // replaced by DynamicJsonDocument which allocates in the heap.
 //
 // DynamicJsonDocument doc(200);
-StaticJsonDocument<200> WebSocketService::jsonMsg;
-StaticJsonDocument<200> WebSocketService::jsonReply;
+StaticJsonDocument<800> WebSocketService::jsonMsg;
 
 // JSON stub string.
 //

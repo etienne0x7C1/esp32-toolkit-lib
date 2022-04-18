@@ -7,6 +7,7 @@
 #include <web-module.h>
 #include <WebSocketService.h>
 #include <module-template.h>
+#include <GpioRemoteService.h>
 // #include <CamControls.h>
 // #include <RovControl.h>
 
@@ -18,6 +19,7 @@ WebModule webModule;
 // RovControl rovcontrol;
 // CamControls camcontrols;
 TemplateModule testModule;
+GpioRemoteService gpioRemoteService("gpioservice");
 
 /**
  * setup
