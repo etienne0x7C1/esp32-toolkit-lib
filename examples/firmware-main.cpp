@@ -8,6 +8,7 @@
 #include <network-module.h>
 #include <WebServices.cpp> // need to use cpp instead of header here due to template use
 #include <core-services.h>
+#include <CamService.h>
 // #include <module-template.h>
 
 // Core modules
@@ -20,6 +21,7 @@ NetworkModule networkModule;
 // Core services
 WebSocketListener<> *wsl;
 JsonWebSocketListener<> *jwsl;
+// CamService<80, defaultWSPath> *cs;
 
 
 /**
@@ -42,6 +44,9 @@ void setup() {
   WebSocketService<> wss;
   wsl = new WebSocketListener<>();
   jwsl = new JsonWebSocketListener<>();
+  // cs = CamService<80, defaultWSPath>::getSingleton();
+  // cs->setup();
+  CamService<80, defaultWSPath>::getSingleton()->setup();
   Serial.println("[ESP32] Done loading services");
   Serial.println("[BuildTag] ab");
 }
