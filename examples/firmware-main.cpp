@@ -1,49 +1,57 @@
-#include <iostream>
+#include "soc/rtc_cntl_reg.h" // Disable brownour problems
+#include "soc/soc.h"          // Disable brownour problems
 #include <Arduino.h>
+#include <iostream>
+#include <ConfigLoader.h>
 #include <FirmwareModule.h>
 #include <filesys-module.h>
-#include <ConfigLoader.h>
 #include <network-module.h>
-#include <web-module.h>
-#include <WebSocketService.h>
-#include <module-template.h>
-#include <CamControls.h>
-#include <RovControl.h>
+#include <WebServices.cpp> // need to use cpp instead of header here due to template use
+#include <core-services.h>
+// #include <module-template.h>
 
-
+// Core modules
 FilesysModule filesysModule;
 ConfigLoader confLoader;
 NetworkModule networkModule;
-WebModule webModule;
-RovControl rovcontrol;
-CamControls camcontrols;
-TemplateModule testModule;
+// Test module
+// TemplateModule testModule;
+
+// Core services
+WebSocketListener<> *wsl;
+JsonWebSocketListener<> *jwsl;
+
 
 /**
  * setup
  */
-void setup()
-{
-    Serial.begin(115200);
-    Serial.println("[ESP32] First log!");
-    // AsyncWebSocket ws("/ws");// = new AsyncWebSocket(wsUrl.c_str());
-    // // create and bind websocket event handler
-    // WebSocketImpl wsh(&ws);
-    // ws.onEvent(wsh.eventHandler);
-    // webModule.addWebSocket(&ws);
-    //  bind websocket event handler
-    WebSocketService::aws.onEvent(WebSocketService::eventHandler);
-    webModule.addWebSocket(&WebSocketService::aws);
-    // Init all modules
-    FirmwareModule::setupAll();
+void setup() {
+  Serial.begin(115200);
+  Serial.println("[ESP32] First log!");
+  // Turn-off the 'brownout detector'
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
+  // Core modules
+  Serial.println("[ESP32] Init core modules ");
+  FirmwareModule::setupAll();
+  Serial.println("[ESP32] Start core services ");
+  WebService<>::start();
+  StaticServer<> staticServer;
+  staticServer.init();
+  OTAServiceWrapper<> otaService;
+  otaService.init();
+  WebSocketService<> wss;
+  wsl = new WebSocketListener<>();
+  jwsl = new JsonWebSocketListener<>();
+  Serial.println("[ESP32] Done loading services");
+  Serial.println("[BuildTag] ab");
 }
 
 /**
  * main loop
  */
-void loop()
-{
-    WebSocketService::aws.cleanupClients();
-    // Refresh all modules
-    FirmwareModule::loopAll();
+void loop() {
+  WebSocketService<>::aws.cleanupClients();
+  // WebSocketListener<80, wsPath>::asyncListenForwardLoop();
+  // Refresh all core modules
+  FirmwareModule::loopAll();
 }
